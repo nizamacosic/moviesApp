@@ -24,7 +24,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout{
     
     func getData() {
         
-        AF.request(Constants.API.apiURL + Constants.API.apiKey).responseDecodable(of: Movies.self) {
+        AF.request(Constants.API.apiUrl + Constants.API.apiKey).responseDecodable(of: Movies.self) {
             response in
             self.movies = response.value
             debugPrint(self.movies!)
@@ -37,15 +37,15 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout{
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width/2)-12, height: (view.frame.size.width/2)+50)
         
-        layout.minimumLineSpacing = 2
-        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        
         collection.frame = .zero
         collection.collectionViewLayout = layout
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
-}
+
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -63,7 +63,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(identifier: "details") as! DetailViewController
-       
+        
         vc.titleString = movies.results[indexPath.row].title
         vc.dateString = movies.results[indexPath.row].releaseDate
         vc.voteDouble = movies.results[indexPath.row].voteAverage

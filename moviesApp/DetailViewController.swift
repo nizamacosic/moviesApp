@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var dateLabel: UILabel!
@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.load(url: imageString!)
+        imageView.load(url: imageString!, baseUrl: Constants.Design.Image.urlBase)
         titleLabel.text = titleString
         dateLabel.text = dateString
         overviewLabel.text = overviewString
