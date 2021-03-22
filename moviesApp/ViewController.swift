@@ -27,7 +27,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout{
         AF.request(Constants.API.apiUrl + Constants.API.apiKey).responseDecodable(of: Movies.self) {
             response in
             self.movies = response.value
-            debugPrint(self.movies!)
             self.collection.reloadData()
         }
     }
@@ -56,13 +55,13 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionViewCell", for: indexPath) as! MoviesCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.MoviesCollectionViewCellIdentifiers, for: indexPath) as! MoviesCollectionViewCell
         cell.setup(with: movies.results[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "details") as! DetailViewController
+        let vc = storyboard?.instantiateViewController(identifier: Constants.Identifiers.DetailViewControllerIdentifier) as! DetailViewController
         
         vc.titleString = movies.results[indexPath.row].title
         vc.dateString = movies.results[indexPath.row].releaseDate

@@ -12,7 +12,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet var image: UIImageView!
     
     func setup(with result: Result) {
-        image.load(url: result.posterPath, baseUrl: Constants.Design.Image.urlBase)
+        image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
     }
 }
