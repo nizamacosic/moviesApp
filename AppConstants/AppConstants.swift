@@ -13,7 +13,6 @@ struct Constants {
         
         struct Image {
             
-            static let urlBase = "https://image.tmdb.org/t/p/w342"
         }
     }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 import Alamofire
-class ViewController: UIViewController, UICollectionViewDelegateFlowLayout{
+class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     var movies: Movies!
     @IBOutlet var collection: UICollectionView!
@@ -38,10 +38,14 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout{
         
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         
         collection.frame = .zero
         collection.collectionViewLayout = layout
+        
+        
     }
+    
 }
 
 
@@ -56,7 +60,9 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.MoviesCollectionViewCellIdentifiers, for: indexPath) as! MoviesCollectionViewCell
+        cell.setLayout()
         cell.setup(with: movies.results[indexPath.row])
+
         return cell
     }
     
