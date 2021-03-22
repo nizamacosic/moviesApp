@@ -32,6 +32,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     func setLayout() {
+        // MARK: CollectionView layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width/2)-12, height: (view.frame.size.width/2)+50)
@@ -43,6 +44,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         collection.frame = .zero
         collection.collectionViewLayout = layout
         
+        //
         
     }
     
@@ -60,7 +62,6 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.MoviesCollectionViewCellIdentifiers, for: indexPath) as! MoviesCollectionViewCell
-        cell.setLayout()
         cell.setup(with: movies.results[indexPath.row])
 
         return cell
@@ -77,5 +78,7 @@ extension ViewController: UICollectionViewDataSource {
         navigationController?.pushViewController(vc, animated: true)
         
     }
+    
+    
 }
 

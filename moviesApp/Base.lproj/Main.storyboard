@@ -35,7 +35,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kjz-6I-bWO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="198"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVv-dS-4xU">
                                                     <rect key="frame" x="0.0" y="0.0" width="190" height="100"/>
@@ -54,13 +54,26 @@
                                                         <constraint firstItem="QvW-NX-5Ep" firstAttribute="leading" secondItem="tVv-dS-4xU" secondAttribute="leading" id="wgF-dN-RMd"/>
                                                     </constraints>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqx-6A-OHz">
+                                                    <rect key="frame" x="153" y="163" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="MXE-Bv-3Ni"/>
+                                                        <constraint firstAttribute="height" constant="35" id="SLY-8d-9GG"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="unselected"/>
+                                                    <connections>
+                                                        <action selector="didTapSelectButton:" destination="uMD-1e-3Bq" eventType="touchUpInside" id="2vd-ui-9LJ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kjz-6I-bWO" firstAttribute="leading" secondItem="L4e-Nm-HZe" secondAttribute="leading" id="1wB-dn-U4r"/>
                                                 <constraint firstAttribute="trailing" secondItem="kjz-6I-bWO" secondAttribute="trailing" id="6Mn-di-S1R"/>
                                                 <constraint firstItem="tVv-dS-4xU" firstAttribute="top" secondItem="L4e-Nm-HZe" secondAttribute="top" id="7H0-Gt-ekb"/>
+                                                <constraint firstAttribute="bottom" secondItem="yqx-6A-OHz" secondAttribute="bottom" constant="2" id="agV-jQ-RzZ"/>
+                                                <constraint firstItem="yqx-6A-OHz" firstAttribute="bottom" secondItem="kjz-6I-bWO" secondAttribute="bottom" id="bN5-eF-hFo"/>
                                                 <constraint firstItem="kjz-6I-bWO" firstAttribute="top" secondItem="L4e-Nm-HZe" secondAttribute="top" id="i3c-ET-oZE"/>
-                                                <constraint firstAttribute="bottom" secondItem="kjz-6I-bWO" secondAttribute="bottom" id="nXd-dY-Peh"/>
+                                                <constraint firstAttribute="trailing" secondItem="yqx-6A-OHz" secondAttribute="trailing" constant="2" id="iEq-gF-xCo"/>
                                                 <constraint firstItem="tVv-dS-4xU" firstAttribute="leading" secondItem="L4e-Nm-HZe" secondAttribute="leading" id="ped-fa-0tM"/>
                                                 <constraint firstAttribute="trailing" secondItem="tVv-dS-4xU" secondAttribute="trailing" id="tkA-c1-ANc"/>
                                             </constraints>
@@ -69,6 +82,7 @@
                                         <connections>
                                             <outlet property="image" destination="kjz-6I-bWO" id="juJ-Yi-IPc"/>
                                             <outlet property="label" destination="QvW-NX-5Ep" id="Zy2-EQ-ePC"/>
+                                            <outlet property="selectButton" destination="yqx-6A-OHz" id="VG0-Oe-Drt"/>
                                             <outlet property="view" destination="tVv-dS-4xU" id="ooX-d4-4Fl"/>
                                         </connections>
                                     </collectionViewCell>
@@ -199,6 +213,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="unselected" width="980" height="980"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
