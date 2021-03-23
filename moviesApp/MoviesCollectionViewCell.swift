@@ -47,7 +47,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
         selectButton.setImage(UIImage(named: "unselected"), for: .normal)
-        selectButton.changeButtonColor(.white)
+        selectButton.changeButtonColor(.lightGray)
         setGradient()
     }
     
