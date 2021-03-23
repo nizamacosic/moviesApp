@@ -10,7 +10,9 @@ import Alamofire
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     var movies: Movies!
+    
     @IBOutlet var collection: UICollectionView!
+    var selectedItemsAtIndex = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,22 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         }
     }
     
+    @objc func deleteMovies() {
+        
+        collection.deleteItems(at: selectedItemsAtIndex)
+        
+    }
+    
     func setLayout() {
+        
+        //
+        collection.allowsMultipleSelection = true
+        //
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteMovies))
+        
         // MARK: CollectionView layout
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width/2)-12, height: (view.frame.size.width/2)+50)
@@ -44,13 +60,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         collection.frame = .zero
         collection.collectionViewLayout = layout
         
-        //
-        
     }
-    
 }
-
-
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -62,12 +73,15 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.MoviesCollectionViewCellIdentifiers, for: indexPath) as! MoviesCollectionViewCell
+        cell.delegate = self
         cell.setup(with: movies.results[indexPath.row])
-
+        
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let vc = storyboard?.instantiateViewController(identifier: Constants.Identifiers.DetailViewControllerIdentifier) as! DetailViewController
         
         vc.titleString = movies.results[indexPath.row].title
@@ -81,4 +95,27 @@ extension ViewController: UICollectionViewDataSource {
     
     
 }
-
+//
+extension ViewController: MoviesCollectionViewCellDelegate {
+    func selectedCell(cell: MoviesCollectionViewCell) {
+        guard let indexPath = self.collection.indexPath(for: cell) else {
+            return
+        }
+        var inIndex: Bool = false
+        
+        for i in selectedItemsAtIndex {
+            if i == indexPath {
+                inIndex = true
+                selectedItemsAtIndex.remove(at: i.row)
+                break
+            }
+            else {
+                inIndex = false
+            }
+        }
+        if !(inIndex) {
+            selectedItemsAtIndex.append(indexPath)
+        }
+        print(selectedItemsAtIndex)
+    }
+}

@@ -60,7 +60,6 @@
                                                         <constraint firstAttribute="width" constant="35" id="MXE-Bv-3Ni"/>
                                                         <constraint firstAttribute="height" constant="35" id="SLY-8d-9GG"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="unselected"/>
                                                     <connections>
                                                         <action selector="didTapSelectButton:" destination="uMD-1e-3Bq" eventType="touchUpInside" id="2vd-ui-9LJ"/>
                                                     </connections>
@@ -213,7 +212,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="unselected" width="980" height="980"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
