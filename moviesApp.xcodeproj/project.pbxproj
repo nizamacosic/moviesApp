@@ -19,6 +19,7 @@
 		10EF74D926024E9100085BAA /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EF74D826024E9100085BAA /* MoviesCollectionViewCell.swift */; };
 		10EF74DC2602A65200085BAA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EF74DB2602A65200085BAA /* DetailViewController.swift */; };
 		96B0DA0A636FB83FB5908A39 /* Pods_moviesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5079463714889811D33CA36E /* Pods_moviesApp.framework */; };
+		B672311F260A4C5800657BC3 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B672311E260A4C5800657BC3 /* UIButtonExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		10EF74DB2602A65200085BAA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4E85200301F104BBD92D6026 /* Pods-moviesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesApp.debug.xcconfig"; path = "Target Support Files/Pods-moviesApp/Pods-moviesApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5079463714889811D33CA36E /* Pods_moviesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moviesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B672311E260A4C5800657BC3 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		D3E0689E2AE021899926DD26 /* Pods-moviesApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesApp.release.xcconfig"; path = "Target Support Files/Pods-moviesApp/Pods-moviesApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				105BF2C62604E2AB009CEE92 /* UIImageViewExtension.swift */,
+				B672311E260A4C5800657BC3 /* UIButtonExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				107E2E6B26022D3C00D9D9FF /* MoviesModel.swift in Sources */,
 				10EF74DC2602A65200085BAA /* DetailViewController.swift in Sources */,
 				105BF2BE2604C6FE009CEE92 /* AppConstants.swift in Sources */,
+				B672311F260A4C5800657BC3 /* UIButtonExtension.swift in Sources */,
 				107E2E542601F1E400D9D9FF /* SceneDelegate.swift in Sources */,
 				105BF2C72604E2AB009CEE92 /* UIImageViewExtension.swift in Sources */,
 				10EF74D926024E9100085BAA /* MoviesCollectionViewCell.swift in Sources */,

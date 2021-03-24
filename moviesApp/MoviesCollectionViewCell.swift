@@ -23,18 +23,18 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     //var isActive = false
     
     @IBAction func didTapSelectButton(_ sender: UIButton) {
-    /*
-        if isActive {
-            
-            isActive = false
-            selectButton.setImage(UIImage(named: "unselected.png"), for: .normal)
-            
-        }
-        else {
-            isActive = true
-            selectButton.setImage(UIImage(named: "selected.png"), for: .normal)
-        }
-        */
+        /*
+         if isActive {
+         
+         isActive = false
+         selectButton.setImage(UIImage(named: "unselected.png"), for: .normal)
+         
+         }
+         else {
+         isActive = true
+         selectButton.setImage(UIImage(named: "selected.png"), for: .normal)
+         }
+         */
         
         delegate?.selectedCell(cell: self)
         
@@ -46,8 +46,12 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         //MARK: Content
         image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
-        
-        
+        selectButton.setImage(UIImage(named: "unselected"), for: .normal)
+        selectButton.changeButtonColor(.lightGray)
+        setGradient()
+    }
+    
+    private func setGradient() {
         //MARK: Image fill
         image.contentMode = .scaleAspectFill
         //MARK: Gradient for UIView
@@ -60,7 +64,6 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient)
         view.layer.addSublayer(label.layer)
-    
     }
 }
 
