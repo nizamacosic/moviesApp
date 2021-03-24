@@ -34,7 +34,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func deleteMovies() {
-        
+                
         collection.deleteItems(at: selectedItemsAtIndex)
         
     }
@@ -92,8 +92,6 @@ extension ViewController: UICollectionViewDataSource {
         navigationController?.pushViewController(vc, animated: true)
         
     }
-    
-    
 }
 //
 extension ViewController: MoviesCollectionViewCellDelegate {
@@ -103,19 +101,21 @@ extension ViewController: MoviesCollectionViewCellDelegate {
         }
         var inIndex: Bool = false
         
-        for i in selectedItemsAtIndex {
-            if i == indexPath {
+        for i in 0..<selectedItemsAtIndex.count {
+            if selectedItemsAtIndex[i] == indexPath {
                 inIndex = true
-                selectedItemsAtIndex.remove(at: i.row)
+                selectedItemsAtIndex.remove(at: i) //
                 break
             }
             else {
                 inIndex = false
             }
         }
+       
         if !(inIndex) {
             selectedItemsAtIndex.append(indexPath)
         }
         print(selectedItemsAtIndex)
+     
     }
 }
