@@ -42,20 +42,17 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setup(with result: Result, active: Bool) {
+    func setup(with result: Result) {
         //MARK: Content
         image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
-        if active == true {
+        
+        if result.selected {
             selectButton.setImage(UIImage(named: "selected"), for: .normal)
-            selectButton.changeButtonColor(.lightGray)
-        }
-        else {
+        } else {
             selectButton.setImage(UIImage(named: "unselected"), for: .normal)
-            selectButton.changeButtonColor(.lightGray)
         }
-        
-        
+        selectButton.changeButtonColor(.lightGray)
         setGradient()
     }
     
@@ -71,6 +68,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient)
+        
         view.layer.addSublayer(label.layer)
     }
 }
