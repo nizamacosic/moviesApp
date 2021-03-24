@@ -37,6 +37,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                 
         collection.deleteItems(at: selectedItemsAtIndex)
         
+        
     }
     
     func setLayout() {
