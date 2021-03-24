@@ -46,15 +46,15 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         //MARK: Content
         image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
+        
         if active == true {
             selectButton.setImage(UIImage(named: "selected"), for: .normal)
-            selectButton.changeButtonColor(.lightGray)
+           
         }
         else {
             selectButton.setImage(UIImage(named: "unselected"), for: .normal)
-            selectButton.changeButtonColor(.lightGray)
         }
-        
+        selectButton.changeButtonColor(.lightGray)
         
         setGradient()
     }
