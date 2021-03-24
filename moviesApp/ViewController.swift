@@ -34,10 +34,23 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func deleteMovies() {
+        
+        for item in 0..<selectedItemsAtIndex.count {
+            
+            print(movies.results[selectedItemsAtIndex[item].row].title)
+            let indexRow = selectedItemsAtIndex[item].row
+            movies.results.remove(at: indexRow)
+    
+            //print(selectedItemsAtIndex)
+            for i in item+1..<selectedItemsAtIndex.count {
+                selectedItemsAtIndex[i].row -= 1
+            }
+            print(selectedItemsAtIndex)
                 
-        collection.deleteItems(at: selectedItemsAtIndex)
+        }
         
-        
+        collection.reloadData()
+        selectedItemsAtIndex.removeAll()
     }
     
     func setLayout() {
@@ -75,9 +88,8 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.MoviesCollectionViewCellIdentifiers, for: indexPath) as! MoviesCollectionViewCell
         cell.delegate = self
+        
         cell.setup(with: movies.results[indexPath.row])
-        
-        
         return cell
     }
     
@@ -106,17 +118,22 @@ extension ViewController: MoviesCollectionViewCellDelegate {
             if selectedItemsAtIndex[i] == indexPath {
                 inIndex = true
                 selectedItemsAtIndex.remove(at: i) //
+                //cell.selectButton.setImage(UIImage(named: "unselected"), for: .normal)
+                //cell.selectButton.changeButtonColor(.lightGray)
                 break
             }
             else {
                 inIndex = false
+                //cell.selectButton.setImage(UIImage(named: "selected"), for: .normal)
+                //cell.selectButton.changeButtonColor(.lightGray)
+                
             }
         }
-       
+        
         if !(inIndex) {
             selectedItemsAtIndex.append(indexPath)
         }
         print(selectedItemsAtIndex)
-     
+        
     }
 }

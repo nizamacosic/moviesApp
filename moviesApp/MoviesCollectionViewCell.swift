@@ -48,6 +48,8 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         label.text = result.title
         selectButton.setImage(UIImage(named: "unselected"), for: .normal)
         selectButton.changeButtonColor(.lightGray)
+        
+        
         setGradient()
     }
     
