@@ -7,24 +7,27 @@
 
 import UIKit
 import Alamofire
+
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-    
-    var movies: Movies!
-    
+
+    // MARK: -IBOutlets
     @IBOutlet var collection: UICollectionView!
     
+    //MARK: -Class properties
+    var movies: Movies!
+    
+    //MARK: -UIViewController events
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
         collection.delegate = self
         collection.dataSource = self
         
-        // Do any additional setup after loading the view.
         getData()
     }
     
+    // MARK: -Fetching data from API
     func getData() {
-        
         AF.request(Constants.API.apiUrl + Constants.API.apiKey).responseDecodable(of: Movies.self) {
             response in
             self.movies = response.value
@@ -33,7 +36,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     @objc func deleteMovies() {
-        
         var moviesIndex = [Int]()
         
         for item in 0..<movies.results.count {
@@ -41,27 +43,20 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                 moviesIndex.append(item)
             }
         }
-        //sort moviesindex desc
         let reversed = Array(moviesIndex.sorted().reversed())
         
         for item in reversed {
             print(movies.results[item].title)
             movies.results.remove(at: item)
         }
-        print(movies.results.count)
-        
         collection.reloadData()
     }
     
+    //MARK: -ViewContoller and UICollectionView layout setup
     func setLayout() {
-        
-        //
         collection.allowsMultipleSelection = true
-        //
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteMovies))
-        
-        // MARK: CollectionView layout
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -70,13 +65,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
         collection.frame = .zero
         collection.collectionViewLayout = layout
-        
     }
 }
 
+// MARK: -UICollectionView Datasource extension
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (movies != nil) {
@@ -94,7 +88,6 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let vc = storyboard?.instantiateViewController(identifier: Constants.Identifiers.DetailViewControllerIdentifier) as! DetailViewController
         
         vc.titleString = movies.results[indexPath.row].title
@@ -103,41 +96,16 @@ extension ViewController: UICollectionViewDataSource {
         vc.overviewString = movies.results[indexPath.row].overview
         vc.imageString = movies.results[indexPath.row].posterPath
         navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
-//
+
+// MARK: -Extension for selected UICollectionView cells
 extension ViewController: MoviesCollectionViewCellDelegate {
     func selectedCell(cell: MoviesCollectionViewCell) {
         guard let indexPath = self.collection.indexPath(for: cell) else {
             return
         }
-        
         movies.results[indexPath.row].selected = !movies.results[indexPath.row].selected
         collection.reloadItems(at: [indexPath])
-        //        var inIndex: Bool = false
-        //
-        //        for i in 0..<selectedItemsAtIndex.count {
-        //            if selectedItemsAtIndex[i] == indexPath {
-        //                inIndex = true
-        //                selectedItemsAtIndex.remove(at: i) //
-        //                cell.selectButton.setImage(UIImage(named: "unselected"), for: .normal)
-        //                cell.selectButton.changeButtonColor(.lightGray)
-        //                break
-        //            }
-        //            else {
-        //                inIndex = false
-        //                cell.selectButton.setImage(UIImage(named: "selected"), for: .normal)
-        //                cell.selectButton.changeButtonColor(.lightGray)
-        //            }
-        //        }
-        //
-        //        if !(inIndex) {
-        //            selectedItemsAtIndex.append(indexPath)
-        //            cell.selectButton.setImage(UIImage(named: "selected"), for: .normal)
-        //            cell.selectButton.changeButtonColor(.lightGray)
-        //        }
-        //        print(selectedItemsAtIndex)
-        
     }
 }
