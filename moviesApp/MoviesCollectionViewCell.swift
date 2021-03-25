@@ -44,20 +44,23 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         setGradient()
     }
     
-    private func setGradient() {
-        //MARK: Image fill
-        image.contentMode = .scaleAspectFill
-        //MARK: Gradient for UIView
-        let gradient = CAGradientLayer()
-        gradient.type = .axial
-        gradient.colors = [
+    private func setGradient() {        
+        let gradientLayer = CAGradientLayer()
+        
+        if let sublayers = view.layer.sublayers {
+            for sublayer in sublayers where sublayer.name == "cellGradient"  {
+                return
+            }
+        }
+        
+        gradientLayer.name = "cellGradient"
+        gradientLayer.type = .axial
+        gradientLayer.colors = [
             UIColor.black.cgColor,
             UIColor.clear.cgColor ]
         
-        gradient.frame = view.bounds
-        view.layer.addSublayer(gradient)
-        
-        view.layer.addSublayer(label.layer)
+        gradientLayer.frame = view.bounds
+        view.layer.addSublayer(gradientLayer)
     }
 }
 
