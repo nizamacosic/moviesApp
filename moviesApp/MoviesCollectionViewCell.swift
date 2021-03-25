@@ -46,10 +46,12 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         
     }
     
+
     
     //MARK: -UIView gradient
-    private func setGradient() {        
+    private func setGradient() {
         let gradientLayer = CAGradientLayer()
+        
         if let sublayers = view.layer.sublayers {
             for sublayer in sublayers where sublayer.name == "cellGradient"  {
                 return
