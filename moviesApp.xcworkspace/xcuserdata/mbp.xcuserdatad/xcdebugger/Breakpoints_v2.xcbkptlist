@@ -23,15 +23,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3902FA50-E337-43DA-822F-06AF3728BC34"
+            uuid = "8B85ADE9-C098-44B3-B5A2-CBBE5C853D9B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moviesApp/MoviesCollectionViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "setGradient()"
             landmarkType = "7">
          </BreakpointContent>

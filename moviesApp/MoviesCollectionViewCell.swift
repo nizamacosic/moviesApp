@@ -46,19 +46,23 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         
     }
     
+    
     //MARK: -UIView gradient
-    private func setGradient() {
-        if view.layer.sublayers!.count < 2 {
-            let gradient = CAGradientLayer()
-            gradient.type = .axial
-            gradient.colors = [
-                UIColor.black.cgColor,
-                UIColor.clear.cgColor ]
-            gradient.locations = [0]
-            gradient.frame = view.bounds
-            view.layer.addSublayer(gradient)
-            view.layer.addSublayer(label.layer)
-            
+    private func setGradient() {        
+        let gradientLayer = CAGradientLayer()
+        if let sublayers = view.layer.sublayers {
+            for sublayer in sublayers where sublayer.name == "cellGradient"  {
+                return
+            }
         }
+        
+        gradientLayer.name = "cellGradient"
+        gradientLayer.type = .axial
+        gradientLayer.colors = [
+            UIColor.black.cgColor,
+            UIColor.clear.cgColor ]
+        
+        gradientLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
