@@ -23,16 +23,13 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         collection.delegate = self
         collection.dataSource = self
         
-        getData()
-    }
-    
-    // MARK: -Fetching data from API
-    func getData() {
-        AF.request(Constants.API.apiUrl + Constants.API.apiKey).responseDecodable(of: Movies.self) {
-            response in
-            self.movies = response.value
+        
+        // MARK: -Fetching data from API
+        NetworkService.shared.getData { (response) in
+            self.movies = response
             self.collection.reloadData()
         }
+        //getData()
     }
     
     @objc func deleteMovies() {

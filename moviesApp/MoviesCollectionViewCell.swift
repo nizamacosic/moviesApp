@@ -34,7 +34,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         
         image.load(url: Constants.API.urlImageBase + result.posterPath)
         label.text = result.title
-        
+        print(image.image)
         if result.selected {
             selectButton.setImage(UIImage(named: "selected"), for: .normal)
         } else {

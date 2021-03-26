@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10219D19260DD7CB00FEDC36 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10219D18260DD7CB00FEDC36 /* NetworkService.swift */; };
 		105BF2BE2604C6FE009CEE92 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BF2BD2604C6FE009CEE92 /* AppConstants.swift */; };
 		105BF2C72604E2AB009CEE92 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BF2C62604E2AB009CEE92 /* UIImageViewExtension.swift */; };
 		107E2E522601F1E400D9D9FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E2E512601F1E400D9D9FF /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10219D18260DD7CB00FEDC36 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		105BF2BD2604C6FE009CEE92 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		105BF2C62604E2AB009CEE92 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		107E2E4E2601F1E400D9D9FF /* moviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10219D12260DD42000FEDC36 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				10219D18260DD7CB00FEDC36 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		105BF2BC2604C6C2009CEE92 /* AppConstants */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +84,7 @@
 		107E2E452601F1E400D9D9FF = {
 			isa = PBXGroup;
 			children = (
+				10219D12260DD42000FEDC36 /* Network */,
 				105BF2C02604E1E2009CEE92 /* Extensions */,
 				105BF2BC2604C6C2009CEE92 /* AppConstants */,
 				107E2E6926022D2400D9D9FF /* Model */,
@@ -247,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10219D19260DD7CB00FEDC36 /* NetworkService.swift in Sources */,
 				107E2E562601F1E400D9D9FF /* ViewController.swift in Sources */,
 				107E2E522601F1E400D9D9FF /* AppDelegate.swift in Sources */,
 				107E2E6B26022D3C00D9D9FF /* MoviesModel.swift in Sources */,
