@@ -9,12 +9,13 @@ import UIKit
 import Alamofire
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-
+    
     // MARK: -IBOutlets
     @IBOutlet var collection: UICollectionView!
     
     //MARK: -Class properties
     var movies: Movies!
+    fileprivate var ttt = "TEST"
     
     //MARK: -UIViewController events
     override func viewDidLoad() {
@@ -25,11 +26,31 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         
         
         // MARK: -Fetching data from API
-        NetworkService.shared.getData { (response) in
-            self.movies = response
-            self.collection.reloadData()
+        NetworkService.shared.getData { (response,err) in
+            if let error = err {
+                print(error.localizedDescription)
+                self.alertView(errorMessage: error.localizedDescription)
+                
+            }
+            else {
+                self.movies = response
+                self.collection.reloadData()
+            }
         }
-        //getData()
+    }
+    
+    // MARK: - API Error alert
+    func alertView(errorMessage: String) {
+        let alert = UIAlertController(title: "Data loading error", message: errorMessage, preferredStyle: .alert)
+
+        let cancelOKAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            exit(0)
+        })
+        
+        alert.addAction(cancelOKAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    
     }
     
     @objc func deleteMovies() {
