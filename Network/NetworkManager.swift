@@ -1,18 +1,18 @@
-//
-//  NetworkManager.swift
-//  moviesApp
-//
-//  Created by MBP on 29/03/2021.
-//
 
 import Foundation
 import Reachability
 
+//Reachability
+//declare this property where it won't go out of scope relative to your listener
+
+
 class NetworkManager: NSObject {
     var reachability: Reachability!
+  
     static let sharedInstance: NetworkManager = {
         return NetworkManager()
     }()
+
     override init() {
         super.init()
         // Initialise reachability
@@ -34,37 +34,17 @@ class NetworkManager: NSObject {
     @objc func networkStatusChanged(_ notification: Notification) {
         // Do something globally here!
     }
-    static func stopNotifier() -> Void {
-        do {
-            // Stop the network status notifier
-            try (NetworkManager.sharedInstance.reachability).startNotifier()
-        } catch {
-            print("Error stopping notifier")
+    
+    // Network is reachable/unreachable
+     func isReachable() -> Bool {
+        if (NetworkManager.sharedInstance.reachability).connection != .unavailable {
+        return true
         }
-    }
-
-    // Network is reachable
-    static func isReachable(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection != .none {
-            completed(NetworkManager.sharedInstance)
-        }
-    }
-    // Network is unreachable
-    static func isUnreachable(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .none {
-            completed(NetworkManager.sharedInstance)
-        }
-    }
-    // Network is reachable via WWAN/Cellular
-    static func isReachableViaWWAN(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .cellular {
-            completed(NetworkManager.sharedInstance)
-        }
-    }
-    // Network is reachable via WiFi
-    static func isReachableViaWiFi(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .wifi {
-            completed(NetworkManager.sharedInstance)
+        else {
+            return false
         }
     }
 }
+
+
+

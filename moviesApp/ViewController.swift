@@ -23,52 +23,28 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         setLayout()
         collection.delegate = self
         collection.dataSource = self
+        checkNetwork()
         
-        // MARK: -Network connection availability check
-        NetworkManager.sharedInstance.reachability.whenReachable = { _ in
-            
-            // MARK: -Fetching data from API
+    }
+    
+    // MARK: -Network connection availability check
+    func checkNetwork() {
+        //
+        if NetworkManager.sharedInstance.isReachable() == true {
             NetworkService.shared.getData { (response,err) in
                 if let error = err {
-                    print(error.localizedDescription)
-                    self.alertViewAPIError(errorMessage: error.localizedDescription)
+                    Alerts.shared.ShowBasic(title: "Data loading error", message: error.localizedDescription, vc: self)
                 }
                 else {
                     self.movies = response
                     self.collection.reloadData()
                 }
             }
+            
         }
-        NetworkManager.sharedInstance.reachability.whenUnreachable = { _ in
-            self.alertViewConnectionAvailability()
+        else {
+            Alerts.shared.ShowBasic(title: "No Internet", message: "This App requires internet connection" , vc: self)
         }
-        
-    }
-    
-    // MARK: - Network connection issue alert
-    func alertViewConnectionAvailability() {
-        let alert = UIAlertController(title: "No Internet", message: "This App requires internet connection", preferredStyle: .alert)
-        
-        let cancelOKAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
-            exit(0)
-        })
-        
-        alert.addAction(cancelOKAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - API Error alert
-    func alertViewAPIError(errorMessage: String) {
-        let alert = UIAlertController(title: "Data loading error", message: errorMessage, preferredStyle: .alert)
-        
-        let cancelOKAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
-            exit(0)
-        })
-        
-        alert.addAction(cancelOKAction)
-        
-        self.present(alert, animated: true, completion: nil)
-        
     }
     
     @objc func deleteMovies() {
