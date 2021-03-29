@@ -7,4 +7,7 @@ target 'moviesApp' do
 
   # Pods for moviesApp
 pod 'Alamofire', '~> 5.2'
+
+
+pod 'ReachabilitySwift'
 end

@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Reachability
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
@@ -15,7 +16,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: -Class properties
     var movies: Movies!
-    fileprivate var ttt = "TEST"
     
     //MARK: -UIViewController events
     override func viewDidLoad() {
@@ -24,25 +24,43 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         collection.delegate = self
         collection.dataSource = self
         
-        
-        // MARK: -Fetching data from API
-        NetworkService.shared.getData { (response,err) in
-            if let error = err {
-                print(error.localizedDescription)
-                self.alertView(errorMessage: error.localizedDescription)
-                
-            }
-            else {
-                self.movies = response
-                self.collection.reloadData()
+        // MARK: -Network connection availability check
+        NetworkManager.sharedInstance.reachability.whenReachable = { _ in
+            
+            // MARK: -Fetching data from API
+            NetworkService.shared.getData { (response,err) in
+                if let error = err {
+                    print(error.localizedDescription)
+                    self.alertViewAPIError(errorMessage: error.localizedDescription)
+                }
+                else {
+                    self.movies = response
+                    self.collection.reloadData()
+                }
             }
         }
+        NetworkManager.sharedInstance.reachability.whenUnreachable = { _ in
+            self.alertViewConnectionAvailability()
+        }
+        
+    }
+    
+    // MARK: - Network connection issue alert
+    func alertViewConnectionAvailability() {
+        let alert = UIAlertController(title: "No Internet", message: "This App requires internet connection", preferredStyle: .alert)
+        
+        let cancelOKAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            exit(0)
+        })
+        
+        alert.addAction(cancelOKAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - API Error alert
-    func alertView(errorMessage: String) {
+    func alertViewAPIError(errorMessage: String) {
         let alert = UIAlertController(title: "Data loading error", message: errorMessage, preferredStyle: .alert)
-
+        
         let cancelOKAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
             exit(0)
         })
@@ -50,7 +68,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         alert.addAction(cancelOKAction)
         
         self.present(alert, animated: true, completion: nil)
-    
+        
     }
     
     @objc func deleteMovies() {
